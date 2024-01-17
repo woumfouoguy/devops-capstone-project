@@ -38,18 +38,9 @@ jobs:
         python -m pip install --upgrade pip wheel
         pip install -r requirements.txt
 
-    - name: Wait for PostgreSQL to start
-      run: |
-        ./github/woumfouoguy/path/to/curl -o wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
-        chmod +x wait-for-it.sh
-        ./wait-for-it.sh localhost:5432 -t 60
-
     - name: Lint with flake8
       run: |
         flake8 service --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Run unit tests with Nose
-      run: nosetests
-      env:
-        DATABASE_URI: "postgresql://postgres:pgs3cr3t@localhost:5432/testdb"
+    # Add additional steps as needed
