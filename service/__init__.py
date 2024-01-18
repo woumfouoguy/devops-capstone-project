@@ -9,6 +9,7 @@ from flask import Flask
 from service import config
 from service.common import log_handlers
 from flask_talisman import Talisman
+from flask_cors import CORS  # Import the CORS class
 
 # Create Flask application
 app = Flask(__name__)
@@ -40,6 +41,9 @@ from service import routes, models  # noqa: F401 E402
 
 # pylint: disable=wrong-import-position
 from service.common import error_handlers, cli_commands  # noqa: F401 E402
+
+# Use the CORS class
+CORS(app)
 
 app.logger.info(70 * "*")
 app.logger.info("  A C C O U N T   S E R V I C E   R U N N I N G  ".center(70, "*"))
